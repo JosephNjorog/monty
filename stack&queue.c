@@ -1,11 +1,11 @@
 #include "monty.h"
 
 /**
- * stack - change from queue mode to stack mode
+ * stacker - change from queue mode to stack mode
  * @stack: the top of the queue/stack
  * @line_number: the location of the opcode in the bytecode
  */
-void stack(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void stacker(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	stack_t *node1, *node2, *lagging;
 
@@ -32,11 +32,11 @@ void stack(stack_t **stack, __attribute__((unused))unsigned int line_number)
 }
 
 /**
- * queue - change from queue mode to stack mode
+ * queuer - change from queue mode to stack mode
  * @stack: the top of the queue/stack
  * @line_number: the location of the opcode in the bytecode
  */
-void queue(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void queuer(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	stack_t *node1, *node2, *lagging;
 
