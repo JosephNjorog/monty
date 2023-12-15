@@ -1,14 +1,14 @@
 #include "monty.h"
 
 /**
- * _atoi - change an string into an integer and check error
+ * s_atoi - change an string into an integer and check error
  * @nptr: the string pointer
  * @endptr: pointer to first, non-invalid character
  * @base: the base of conversion
  *
  * Return: the read number or 0
  */
-int _atoi(char *nptr, char **endptr, int base)
+int s_atoi(char *nptr, char **endptr, int base)
 {
 	if (nptr && *nptr)
 		return (strtol(nptr, endptr, base));
@@ -16,13 +16,13 @@ int _atoi(char *nptr, char **endptr, int base)
 }
 
 /**
- * _realloc - reallocates a memory block using malloc and free
+ * m_realloc - reallocates a memory block using malloc and free
  * @ptr: previous memory pointer
  * @old_size: size of ptr int bytes
  * @new_size: new size in bytes
  * Return: pointer to new allocated memory (Success) | NULL (Failure)
  */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+void *m_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	void *p;
 	char *c, *k;
@@ -53,12 +53,12 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 }
 
 /**
- * free_stack - frees stack memory
+ * free_stacker - frees stack memory
  * @stack: stack's top element
  *
  * Return: void
  */
-void free_stack(stack_t *stack)
+void free_stacker(stack_t *stack)
 {
 	stack_t *next_e;
 
