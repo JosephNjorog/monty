@@ -1,13 +1,13 @@
 #include "monty.h"
 
 /**
- * push - pushes data to the top of the stack
+ * pusher - pushes data to the top of the stack
  * @stack: pointer to top of the stack
  * @line_number: opcode's line number
  *
  * Return: void
  */
-void push(stack_t **stack, unsigned int line_number)
+void pusher(stack_t **stack, unsigned int line_number)
 {
 	int n;
 	char *s, *invalid;
@@ -29,13 +29,13 @@ void push(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * pall - prints all elements of a stack
+ * paller - prints all elements of a stack
  * @stack: pointer to top of the stack
  * @line_number: opcode's line number
  *
  * Return: void
  */
-void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void paller(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	stack_t *tmp;
 
@@ -53,11 +53,11 @@ void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 }
 
 /**
- * pint - print an item at the top of the stack
+ * pinter - print an item at the top of the stack
  * @stack: pointer to the reference to the TOS
  * @line_number: to print in an error message
  */
-void pint(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void pinter(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	if (stack && *stack)
 		printf("%d\n", (*stack)->n);
@@ -69,13 +69,13 @@ void pint(stack_t **stack, __attribute__((unused))unsigned int line_number)
 }
 
 /**
- * pop - removes top element of stack
+ * poper - removes top element of stack
  * @stack: pointer to top of the stack
  * @line_number: opcode' line number
  *
  * Return: void
  */
-void pop(stack_t **stack, unsigned int line_number)
+void poper(stack_t **stack, unsigned int line_number)
 {
 	stack_t *popped = pop2(stack, line_number);
 
@@ -83,7 +83,7 @@ void pop(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * pop2 - pop an element from the stack and return it
+ * poper2 - pop an element from the stack and return it
  * @stack: pointer to top of the stack
  * @line_number: the opcode's line number in the bytecode file
  *
@@ -92,7 +92,7 @@ void pop(stack_t **stack, unsigned int line_number)
  *
  * Return: the removed
  */
-stack_t *pop2(stack_t **stack, unsigned int line_number)
+stack_t *poper2(stack_t **stack, unsigned int line_number)
 {
 	stack_t *popped, *new_top;
 
