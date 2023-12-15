@@ -1,12 +1,12 @@
 #include "monty.h"
 
 /**
- * get_opcode - get instruction/opcode from line
+ * pata_opc - get instruction/opcode from line
  * @line: given line
  *
  * Return: opcode (Found) | NULL (Not Found)
  */
-char *get_opcode(char *line)
+char *pata_opc(char *line)
 {
 	const char *del;
 	char *opcode;
@@ -20,12 +20,12 @@ char *get_opcode(char *line)
 }
 
 /**
- * get_instruction - get opcode's matching function
+ * pata_ins - get opcode's matching function
  * @opcode: given opcode
  *
  * Return: pointer to matching function | NULL (Invalid opcode)
  */
-void (*get_instruction(char *opcode))(stack_t **, unsigned int)
+void (*pata_ins(char *opcode))(stack_t **, unsigned int)
 {
 	instruction_t list[] = {
 		{"swap", swap}, {"push", push},
