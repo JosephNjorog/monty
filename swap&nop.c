@@ -1,11 +1,11 @@
 #include "monty.h"
 
 /**
- * swap - swap a TOS item with the one preeding it
+ * swaper - swap a TOS item with the one preeding it
  * @stack: pointer to reference to item at TOS
  * @line_number: for the error message
  */
-void swap(stack_t **stack, unsigned int line_number)
+void swaper(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tos_node, *next_tos;
 
