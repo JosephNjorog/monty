@@ -43,34 +43,38 @@ typedef struct instruction_s
 } instruction_t;
 
 void read_monty(int);
-void execute_monty(char *, unsigned int, stack_t **);
-char *get_opcode(char *line);
-void (*get_instruction(char *opcode))(stack_t **, unsigned int);
+void monty_executer(char *, unsigned int, stack_t **);
+char *pata_opc(char *line);
+void (*pata_ins(char *opcode))(stack_t **, unsigned int);
 void push(stack_t **stack, unsigned int line_number);
-stack_t *add_to_TOS(stack_t **stack, int n);
+stack_t *add_top(stack_t **stack, int n);
 void pall(stack_t **stack, __attribute__((unused))unsigned int line_number);
-ssize_t _getline(char **, size_t *, int);
+ssize_t _getlain(char **, size_t *, int);
 void free_stack(stack_t *stack);
 int _atoi(char *nptr, char **endptr, int base);
 void pop(stack_t **, unsigned int);
-void add(stack_t **stack, unsigned int line_number);
+void ongeza(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, __attribute__((unused))unsigned int line_number);
 stack_t *pop2(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
-void sub(stack_t **stack, unsigned int line_number);
-void mul(stack_t **stack, unsigned int line_number);
-unsigned int empty(char *buffer);
-void pstr(stack_t **stack, unsigned int line_number);
+void ondoa(stack_t **stack, unsigned int line_number);
+void zidisha(stack_t **stack, unsigned int line_number);
+int fill_buf(char *buffer, int i, char **b, size_t *n,
+int fd, size_t size)
+unsigned int hakuna(char *buffer);
+void strprinter(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
-void divide(stack_t **stack, unsigned int line_number);
-void modulus(stack_t **stack, unsigned int line_number);
-void pchar(stack_t **stack, unsigned int line_number);
+void divaid(stack_t **stack, unsigned int line_number);
+void modul(stack_t **stack, unsigned int line_number);
+void charprinter(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void stack(stack_t **stack, __attribute__((unused))unsigned int line_number);
 void queue(stack_t **stack, __attribute__((unused))unsigned int line_number);
-stack_t *add_to_queue(stack_t **stack, int n);
+stack_t *add_queue(stack_t **stack, int n);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+int _soma(char *b, unsigned int size, int fd)
+size_t line_saiz(char *b, int i)
 
 #endif /* H */
