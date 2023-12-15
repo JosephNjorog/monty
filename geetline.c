@@ -3,14 +3,14 @@
 #define BUFFER_SIZE 1024
 
 /**
- * _read - reads content from file
- * @b: buffer to be filled
- * @size: buffer size
- * @fd: file descriptor
+ * _soma - reads the content from file.
+ * @b: buffer to be filled.
+ * @size: buffer size.
+ * @fd: file descriptor.
  *
  * Return: number of characters read
  */
-int _read(char *b, unsigned int size, int fd)
+int _soma(char *b, unsigned int size, int fd)
 {
 	unsigned int j;
 	int ret;
@@ -28,13 +28,13 @@ int _read(char *b, unsigned int size, int fd)
 }
 
 /**
- * line_size - counts a line's size of characters
+ * line_saiz - counts a line's size of characters
  * @b: buffer
  * @i: starting index
  *
  * Return: number of characters in a line
  */
-size_t line_size(char *b, int i)
+size_t line_saiz(char *b, int i)
 {
 	size_t size;
 
@@ -46,7 +46,7 @@ size_t line_size(char *b, int i)
 }
 
 /**
- * fill_b - fills buffer 'b' with a line from 'buffer'
+ * fill_buf - fills buffer 'b' with a line from 'buffer'
  * @buffer: buffer containing content
  * @i: starting index of buffer
  * @b: pointer to buffer to be filled
@@ -56,7 +56,7 @@ size_t line_size(char *b, int i)
  *
  * Return: new position of i
  */
-int fill_b(char *buffer, int i, char **b, size_t *n,
+int fill_buf(char *buffer, int i, char **b, size_t *n,
 int fd, size_t size)
 {
 	size_t new_size;
@@ -83,14 +83,14 @@ int fd, size_t size)
 }
 
 /**
- * _getline - reads an entire line from file
+ * _getlain - reads an entire line from file
  * @b: buffer to put the line in
  * @n: size of buffer
  * @fd: file descriptor
  *
  * Return: number of read characters | -1 (Failure {including EOF)
  */
-ssize_t _getline(char **b, size_t *n, int fd)
+ssize_t _getlain(char **b, size_t *n, int fd)
 {
 	static char buffer[BUFFER_SIZE];
 	static int i;
