@@ -1,13 +1,13 @@
 #include "monty.h"
 
 /**
- * add_to_TOS - adds new element to top of the stack
+ * add_top - adds new element to top of the stack
  * @stack: pointer to top of the stack
  * @n: element's data
  *
  * Return: pointer to new element
  */
-stack_t *add_to_TOS(stack_t **stack, int n)
+stack_t *add_top(stack_t **stack, int n)
 {
 	stack_t *new_e;
 
@@ -29,13 +29,13 @@ stack_t *add_to_TOS(stack_t **stack, int n)
 }
 
 /**
- * add_to_queue - adds new element to head of the queue
+ * add_queue - adds new element to head of the queue
  * @stack: pointer to head of the queue
  * @n: element's data
  *
  * Return: pointer to new element
  */
-stack_t *add_to_queue(stack_t **stack, int n)
+stack_t *add_queue(stack_t **stack, int n)
 {
 	stack_t *new_e, *node;
 
