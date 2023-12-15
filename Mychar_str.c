@@ -1,11 +1,11 @@
 #include "monty.h"
 
 /**
- * pchar - print a char from the stack to the standard output
+ * charprinter - print a char from the stack to the standard output
  * @stack: the top of the stack
  * @line_number: the position of the opcode in the bytecode
  */
-void pchar(stack_t **stack, unsigned int line_number)
+void charprinter(stack_t **stack, unsigned int line_number)
 {
 	if (!stack || !*stack)
 	{
@@ -14,19 +14,19 @@ void pchar(stack_t **stack, unsigned int line_number)
 	}
 	if ((*stack)->n > 127 || (*stack)->n < 0)
 	{
-		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
+		fprintf(stderr, "L%u: can't charprinter, value out of range\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	printf("%c\n", (*stack)->n);
 }
 
 /**
- * empty - writes a buffer to stdout and frees it
+ * hakuna - writes a buffer to stdout and frees it
  * @buffer: given buffer
  *
  * Return: always 0
  */
-unsigned int empty(char *buffer)
+unsigned int hakuna(char *buffer)
 {
 	int i;
 
@@ -37,13 +37,13 @@ unsigned int empty(char *buffer)
 }
 
 /**
- * pstr - prints string at TOS
+ * strprinter - prints string at TOS
  * @stack: pointer to top of the stack
  * @line_number: opcode' line number
  *
  * Return: void
  */
-void pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void strprinter(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	unsigned int i;
 	char buffer[100];
