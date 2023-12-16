@@ -49,7 +49,7 @@ unsigned int token_len(void);
 int run_mymonty(FILE *script_fd);
 void set_tokn_error(int error_code);
 
-void monty_push(stack_t **stack, unsigned int line_number);
+void monty_pusher(stack_t **stack, unsigned int line_number);
 void monty_paller(stack_t **stack, unsigned int line_number);
 void monty_pinter(stack_t **stack, unsigned int line_number);
 void monty_poper(stack_t **stack, unsigned int line_number);
