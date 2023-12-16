@@ -1,16 +1,16 @@
 #include "monty.h"
 #include <string.h>
 
-void free_stack(stack_t **stack);
-int init_stack(stack_t **stack);
+void free_stacker(stack_t **stack);
+int init_stacker(stack_t **stack);
 int check_mode(stack_t *stack);
 
 /**
- * free_stack - Frees a stack_t stack.
+ * free_stacker - Frees a stack_t stack.
  * @stack: A pointer to the top (stack) or
  *         bottom (queue) of a stack_t.
  */
-void free_stack(stack_t **stack)
+void free_stacker(stack_t **stack)
 {
 	stack_t *tmp = *stack;
 
@@ -23,20 +23,20 @@ void free_stack(stack_t **stack)
 }
 
 /**
- * init_stack - Initializes a stack_t stack with beginning
+ * init_stacker - Initializes a stack_t stack with beginning
  *              stack and ending queue nodes.
  * @stack: A pointer to an unitialized stack_t stack.
  *
  * Return: If an error occurs - EXIT_FAILURE.
  *         Otherwise - EXIT_SUCCESS.
  */
-int init_stack(stack_t **stack)
+int init_stacker(stack_t **stack)
 {
 	stack_t *s;
 
 	s = malloc(sizeof(stack_t));
 	if (s == NULL)
-		return (malloc_error());
+		return (error_maller());
 
 	s->n = STACK;
 	s->prev = NULL;
@@ -48,7 +48,7 @@ int init_stack(stack_t **stack)
 }
 
 /**
- * check_mode - Checks if a stack_t linked list is in stack or queue mode.
+ * mode_checker - Checks if a stack_t linked list is in stack or queue mode.
  * @stack: A pointer to the top (stack) or bottom (queue)
  *         of a stack_t linked list.
  *
@@ -56,7 +56,7 @@ int init_stack(stack_t **stack)
  *         If the stack_t is in queue mode - QUEUE (1).
  *         Otherwise - 2.
  */
-int check_mode(stack_t *stack)
+int mode_checker(stack_t *stack)
 {
 	if (stack->n == STACK)
 		return (STACK);
