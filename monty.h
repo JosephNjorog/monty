@@ -58,6 +58,11 @@ int get_wrdlength(char *str, char *delims);
 int get_wrdcount(char *str, char *delims);
 char *get_nxtword(char *str, char *delims);
 
+unsigned int _abser(int);
+int get_numb_len(unsigned int num, unsigned int base);
+void fill_numb_buff(unsigned int num, unsigned int base,
+		       char *buff, int buff_size);
+
 void monty_pusher(stack_t **stack, unsigned int line_number);
 void monty_paller(stack_t **stack, unsigned int line_number);
 void monty_pinter(stack_t **stack, unsigned int line_number);
