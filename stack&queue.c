@@ -1,63 +1,66 @@
 #include "monty.h"
+#include <string.h>
+
+void free_stack(stack_t **stack);
+int init_stack(stack_t **stack);
+int check_mode(stack_t *stack);
 
 /**
- * stacker - change from queue mode to stack mode
- * @stack: the top of the queue/stack
- * @line_number: the location of the opcode in the bytecode
+ * free_stack - Frees a stack_t stack.
+ * @stack: A pointer to the top (stack) or
+ *         bottom (queue) of a stack_t.
  */
-void stacker(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void free_stack(stack_t **stack)
 {
-	stack_t *node1, *node2, *lagging;
+	stack_t *tmp = *stack;
 
-	if (struct_state == IN_QUEUE)
+	while (*stack)
 	{
-		if (*stack && (*stack)->next)
-		{
-			lagging = *stack;
-			node1 = (*stack)->next;
-			while (node1)
-			{
-				node2 = node1->next;
-
-				lagging->prev = node1;
-				node1->next = lagging;
-
-				lagging = node1;
-				node1 = node2;
-			}
-			lagging->prev = NULL;
-		}
-		struct_state = IN_STACK;
+		tmp = (*stack)->next;
+		free(*stack);
+		*stack = tmp;
 	}
 }
 
 /**
- * queuer - change from queue mode to stack mode
- * @stack: the top of the queue/stack
- * @line_number: the location of the opcode in the bytecode
+ * init_stack - Initializes a stack_t stack with beginning
+ *              stack and ending queue nodes.
+ * @stack: A pointer to an unitialized stack_t stack.
+ *
+ * Return: If an error occurs - EXIT_FAILURE.
+ *         Otherwise - EXIT_SUCCESS.
  */
-void queuer(stack_t **stack, __attribute__((unused))unsigned int line_number)
+int init_stack(stack_t **stack)
 {
-	stack_t *node1, *node2, *lagging;
+	stack_t *s;
 
-	if (struct_state == IN_STACK)
-	{
-		if (*stack && (*stack)->prev)
-		{
-			lagging = *stack;
-			node1 = (*stack)->prev;
-			while (node1)
-			{
-				node2 = node1->prev;
+	s = malloc(sizeof(stack_t));
+	if (s == NULL)
+		return (malloc_error());
 
-				lagging->next = node1;
-				node1->prev = lagging;
+	s->n = STACK;
+	s->prev = NULL;
+	s->next = NULL;
 
-				lagging = node1;
-				node1 = node2;
-			}
-			lagging->next = NULL;
-		}
-		struct_state = IN_QUEUE;
-	}
+	*stack = s;
+
+	return (EXIT_SUCCESS);
+}
+
+/**
+ * check_mode - Checks if a stack_t linked list is in stack or queue mode.
+ * @stack: A pointer to the top (stack) or bottom (queue)
+ *         of a stack_t linked list.
+ *
+ * Return: If the stack_t is in stack mode - STACK (0).
+ *         If the stack_t is in queue mode - QUEUE (1).
+ *         Otherwise - 2.
+ */
+int check_mode(stack_t *stack)
+{
+	if (stack->n == STACK)
+		return (STACK);
+	else if (stack->n == QUEUE)
+		return (QUEUE);
+	return (2);
 }
