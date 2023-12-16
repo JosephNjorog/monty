@@ -7,17 +7,17 @@
  * set_op_tok_error - Sets the last element of op_toks to be an error code.
  * @error_code: Integer to store as a string in op_toks.
  */
-void set_op_tok_error(int error_code)
+void set_tokn_error(int error_code)
 {
     int toks_len = 0, i = 0;
     char *exit_str = NULL;
     char **new_toks = NULL;
 
-    toks_len = token_arr_len();
+    toks_len = tokn_arg_len();
     new_toks = malloc(sizeof(char *) * (toks_len + 2));
     if (!op_toks)
     {
-        malloc_error();
+        error_maller();
         return;
     }
     while (i < toks_len)
@@ -26,10 +26,10 @@ void set_op_tok_error(int error_code)
         i++;
     }
 
-    char error_str[20]; // Adjust the size as needed
+    char error_str[20];
     snprintf(error_str, sizeof(error_str), "%d", error_code);
 
-    exit_str = get_inter(strlen(error_str), /* pass the correct file pointer here */);
+    exit_str = get_inter(strlen(int error_str));
     if (!exit_str)
     {
         free(new_toks);
