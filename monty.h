@@ -82,7 +82,7 @@ void monty_stacker(stack_t **stack, unsigned int line_number);
 void monty_queuer(stack_t **stack, unsigned int line_number);
 
 char **strtower(char *str, char *delims);
-char *get_inter(int n);
+char *get_inter(size_t len, FILE *script_fd);
 
 
 int error_usge(void);
