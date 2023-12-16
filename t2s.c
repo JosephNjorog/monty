@@ -33,7 +33,7 @@ char **strtower(char *str, char *delims)
 	while (i < wc)
 	{
 		wordLen = get_wrdlength(str, delims);
-		if (is_delim(*str, delims))
+		if (is_mydelim(*str, delims))
 		{
 			str = get_nxtword(str, delims);
 		}
