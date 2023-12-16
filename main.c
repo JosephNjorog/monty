@@ -1,41 +1,29 @@
 #include "monty.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+char **op_toks = NULL;
 
 /**
- * main - simple interpreter for Monty 0.98 scripting language
- * @ac: arguments' count
- * @av: arguments' vector
- * Description: Monty 0.98 is a scripting language,
- * that is first compiled into Monty byte codes (Just like Python).
- * It relies on a unique stack, with specific instructions to manipulate it.
- * The goal is to create an interpreter for Monty ByteCodes files.
+ * main - the entry point for Monty Interp
  *
- * Return: 0 (Success) | exits with EXIT_FAILURE (Failure)
+ * @argc: the count of arguments passed to the program
+ * @argv: pointer to an array of char pointers to arguments
+ *
+ * Return: (EXIT_SUCCESS) on success (EXIT_FAILURE) on error
  */
-int main(int ac, char **av)
+int main(int argc, char **argv)
 {
-	int fd;
+	FILE *script_fd = NULL;
+	int exit_code = EXIT_SUCCESS;
 
-	/* initialize state to stack*/
-	struct_state = IN_STACK;
-	/* check usage */
-	if (ac != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
-
-	/* open file if possible */
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
-		exit(EXIT_FAILURE);
-	}
-
-	/* execute instructions */
-	read_monty(fd);
-
-	/* close file and end the program */
-	close(fd);
-	return (0);
+	if (argc != 2)
+		return (error_usge());
+	script_fd = fopen(argv[1], "r");
+	if (script_fd == NULL)
+		return (opener_error(argv[1]));
+	exit_code = run_mymonty(script_fd);
+	fclose(script_fd);
+	return (exit_code);
 }
