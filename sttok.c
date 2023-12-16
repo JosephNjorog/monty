@@ -22,7 +22,7 @@ void set_tokn_error(int error_code)
         new_toks[i] = op_toks[i];
         i++;
     }
-    exit_str = get_inter(error_code); // Assuming get_inter accepts only an integer
+    exit_str = *get_inter(error_code);
     if (!exit_str)
     {
         free(new_toks);
