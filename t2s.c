@@ -1,13 +1,13 @@
 #include <stdlib.h>
 
-char **strtow(char *str, char *delims);
+char **strtower(char *str, char *delims);
 int is_mydelim(char ch, char *delims);
 int get_wrdlength(char *str, char *delims);
 int get_wrdcount(char *str, char *delims);
 char *get_nxtword(char *str, char *delims);
 
 /**
- * strtow - it does takes a string and seperates its words
+ * strtower - it does takes a string and seperates its words
  *
  * @str: string to seperate into words
  * @delims: delimitors to use to delimit words
@@ -15,7 +15,7 @@ char *get_nxtword(char *str, char *delims);
  * Return: 2D array of pointers to each word
  */
 
-char **strtow(char *str, char *delims)
+char **strtower(char *str, char *delims)
 {
 	char **words = NULL;
 	int wc, wordLen, n, i = 0;
