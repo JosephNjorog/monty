@@ -1,4 +1,3 @@
-
 #include "monty.h"
 #include <string.h>
 
@@ -92,7 +91,7 @@ int run_mymonty(FILE *script_fd)
     if (init_stackar(&stack) == EXIT_FAILURE)
         return (EXIT_FAILURE);
 
-    while (get_inter(line, len, script_fd) != -1)
+    while ((line = get_inter(len, script_fd)) != NULL)
     {
         line_number++;
         op_toks = (char **)strtok(line, DELIMS);
@@ -102,11 +101,13 @@ int run_mymonty(FILE *script_fd)
             if (empt_line(line, DELIMS))
                 continue;
             free_stackar(&stack);
+            free(line);
             return (error_maller());
         }
         else if (op_toks[0][0] == '#') /* comment line */
         {
             free_tokns();
+            free(line);
             continue;
         }
         op_func = get_opfun(op_toks[0]);
@@ -116,6 +117,7 @@ int run_mymonty(FILE *script_fd)
             free_stackar(&stack);
             exit_status = unknown_error(op_toks[0], line_number);
             free_tokns();
+            free(line);
             break;
         }
         prev_tok_len = tokn_arg_len();
@@ -129,9 +131,11 @@ int run_mymonty(FILE *script_fd)
                 exit_status = EXIT_FAILURE;
 
             free_tokns();
+            free(line);
             break;
         }
         free_tokns();
+        free(line);
     }
 
     free_stackar(&stack);
