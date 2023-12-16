@@ -119,10 +119,10 @@ int run_mymonty(FILE *script_fd)
 	if (init_stackar(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 
-	while (getline(&line, &len, script_fd) != -1)
+	while (get_inter(&line, &len, script_fd) != -1)
 	{
 		line_number++;
-		op_toks = strtow(line, DELIMS);
+		op_toks = strtok(line, DELIMS);
 		if (op_toks == NULL)
 		{
 			if (empt_line(line, DELIMS))
