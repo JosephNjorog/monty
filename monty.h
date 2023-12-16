@@ -49,6 +49,12 @@ unsigned int token_len(void);
 int run_mymonty(FILE *script_fd);
 void set_tokn_error(int error_code);
 
+char **strtower(char *str, char *delims);
+int is_mydelim(char ch, char *delims);
+int get_wrdlength(char *str, char *delims);
+int get_wrdcount(char *str, char *delims);
+char *get_nxtword(char *str, char *delims);
+
 void monty_pusher(stack_t **stack, unsigned int line_number);
 void monty_paller(stack_t **stack, unsigned int line_number);
 void monty_pinter(stack_t **stack, unsigned int line_number);
