@@ -1,16 +1,15 @@
-#ifndef H
-#define H
+#ifndef MONTY_H
+#define MONTY_H
 
-#define IN_QUEUE 1
-#define IN_STACK 0
-
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-int struct_state;
+#define STACK 0
+#define QUEUE 1
+#define DELIMS " \n\t\a\b"
+
+extern char **op_toks;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -19,13 +18,13 @@ int struct_state;
  * @next: points to the next element of the stack (or queue)
  *
  * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO
+ * for stack, queues, LIFO, FIFO Holberton project
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -34,47 +33,54 @@ typedef struct stack_s
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
+ * for stack, queues, LIFO, FIFO Holberton project
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void reed_monty(int);
-void monty_executer(char *, unsigned int, stack_t **);
-char *pata_opc(char *line);
-void (*pata_ins(char *opcode))(stack_t **, unsigned int);
-void pusher(stack_t **stack, unsigned int line_number);
-stack_t *add_top(stack_t **stack, int n);
-void paller(stack_t **stack, __attribute__((unused))unsigned int line_number);
-ssize_t _getlain(char **, size_t *, int);
-void free_stacker(stack_t *stack);
-int s_atoi(char *nptr, char **endptr, int base);
-void poper(stack_t **, unsigned int);
-void ongeza(stack_t **stack, unsigned int line_number);
-void pinter(stack_t **stack, __attribute__((unused))unsigned int line_number);
-stack_t *poper2(stack_t **stack, unsigned int line_number);
-void swaper(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
-void ondoa(stack_t **stack, unsigned int line_number);
-void zidisha(stack_t **stack, unsigned int line_number);
-int fill_buf(char *buffer, int i, char **b, size_t *n,
-int fd, size_t size)
-unsigned int hakuna(char *buffer);
-void strprinter(stack_t **stack, unsigned int line_number);
-void roteer(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
-void divaid(stack_t **stack, unsigned int line_number);
-void modul(stack_t **stack, unsigned int line_number);
-void charprinter(stack_t **stack, unsigned int line_number);
-void roteel(stack_t **stack, unsigned int line_number);
-void stacker(stack_t **stack, __attribute__((unused))unsigned int line_number);
-void queuer(stack_t **stack, __attribute__((unused))unsigned int line_number);
-stack_t *add_queue(stack_t **stack, int n);
-void *m_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-int _soma(char *b, unsigned int size, int fd)
-size_t line_saiz(char *b, int i)
+void free_stackar(stack_t **stack);
+int init_stackar(stack_t **stack);
+int mode_checker(stack_t *stack);
+void free_tokns(void);
+unsigned int token_len(void);
+int run_mymonty(FILE *script_fd);
+void set_tokn_error(int error_code);
 
-#endif /* H */
+void monty_pusher(stack_t **stack, unsigned int line_number);
+void monty_paller(stack_t **stack, unsigned int line_number);
+void monty_pinter(stack_t **stack, unsigned int line_number);
+void monty_poper(stack_t **stack, unsigned int line_number);
+void monty_swaper(stack_t **stack, unsigned int line_number);
+void monty_adder(stack_t **stack, unsigned int line_number);
+void monty_noper(stack_t **stack, unsigned int line_number);
+void monty_suber(stack_t **stack, unsigned int line_number);
+void monty_diver(stack_t **stack, unsigned int line_number);
+void monty_muler(stack_t **stack, unsigned int line_number);
+void monty_moder(stack_t **stack, unsigned int line_number);
+void monty_pcharer(stack_t **stack, unsigned int line_number);
+void monty_pstrer(stack_t **stack, unsigned int line_number);
+void monty_rotler(stack_t **stack, unsigned int line_number);
+void monty_rotrer(stack_t **stack, unsigned int line_number);
+void monty_stacker(stack_t **stack, unsigned int line_number);
+void monty_queuer(stack_t **stack, unsigned int line_number);
+
+char **strtower(char *str, char *delims);
+char *get_inter(int n);
+
+
+int error_usge(void);
+int error_maller(void);
+int opener_error(char *filename);
+int unknown_error(char *opcode, unsigned int line_number);
+int no_error(unsigned int line_number);
+int poper_error(unsigned int line_number);
+int pinter_error(unsigned int line_number);
+int shorter_error(unsigned int line_number, char *op);
+int error_diver(unsigned int line_number);
+int pcharact_error(unsigned int line_number, char *message);
+
+
+#endif
