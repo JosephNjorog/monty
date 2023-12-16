@@ -45,7 +45,10 @@ void free_stackar(stack_t **stack);
 int init_stackar(stack_t **stack);
 int mode_checker(stack_t *stack);
 void free_tokns(void);
-unsigned int token_len(void);
+unsigned int tokn_arg_len(void);
+void (*get_opfun(char *opcode))(stack_t**, unsigned int);
+int empt_line(char *line, char *delims);
+
 int run_mymonty(FILE *script_fd);
 void set_tokn_error(int error_code);
 
