@@ -1,120 +1,143 @@
 #include "monty.h"
 
-/**
- * pusher - pushes data to the top of the stack
- * @stack: pointer to top of the stack
- * @line_number: opcode's line number
- *
- * Return: void
- */
-void pusher(stack_t **stack, unsigned int line_number)
-{
-	int n;
-	char *s, *invalid;
+void monty_pusher(stack_t **stack, unsigned int line_number);
+void monty_paller(stack_t **stack, unsigned int line_number);
+void monty_pinter(stack_t **stack, unsigned int line_number);
+void monty_poper(stack_t **stack, unsigned int line_number);
+void monty_swaper(stack_t **stack, unsigned int line_number);
 
-	invalid = "";
-	/* get value to be pushed to TOS */
-	s = strtok(NULL, "\t\n ");
-	if (s && invalid)
-		n = _atoi(s, &invalid, 10);
-	if (!s || *invalid != '\0')
+/**
+ * monty_pusher - Pushes a value to a stack_t linked list.
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @line_number: The current working line number of a Monty bytecodes file.
+ */
+void monty_pusher(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp, *new;
+	int i;
+
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
 	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
+		set_tokn_error(error_maller());
+		return;
 	}
-	if (struct_state == IN_STACK)
-		add_to_TOS(stack, n);
-	else
-		add_to_queue(stack, n);
+
+	if (op_toks[1] == NULL)
+	{
+		set_tokn_error(no_error(line_number));
+		return;
+	}
+
+	for (i = 0; op_toks[1][i]; i++)
+	{
+		if (op_toks[1][i] == '-' && i == 0)
+			continue;
+		if (op_toks[1][i] < '0' || op_toks[1][i] > '9')
+		{
+			set_tokn_error(no_error(line_number));
+			return;
+		}
+	}
+	new->n = atoi(op_toks[1]);
+
+	if (mode_checker(*stack) == STACK) /* STACK mode insert at front */
+	{
+		tmp = (*stack)->next;
+		new->prev = *stack;
+		new->next = tmp;
+		if (tmp)
+			tmp->prev = new;
+		(*stack)->next = new;
+	}
+	else /* QUEUE mode insert at end */
+	{
+		tmp = *stack;
+		while (tmp->next)
+			tmp = tmp->next;
+		new->prev = tmp;
+		new->next = NULL;
+		tmp->next = new;
+	}
 }
 
 /**
- * paller - prints all elements of a stack
- * @stack: pointer to top of the stack
- * @line_number: opcode's line number
- *
- * Return: void
+ * monty_paller - Prints the values of a stack_t linked list.
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @line_number: The current working line number of a Monty bytecodes file.
  */
-void paller(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void monty_paller(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
+	stack_t *tmp = (*stack)->next;
 
-	if (!stack)
-		return;
-	tmp = *stack;
 	while (tmp)
 	{
 		printf("%d\n", tmp->n);
-		if (struct_state == IN_STACK)
-			tmp = tmp->prev;
-		else
-			tmp = tmp->next;
+		tmp = tmp->next;
 	}
+	(void)line_number;
 }
 
 /**
- * pinter - print an item at the top of the stack
- * @stack: pointer to the reference to the TOS
- * @line_number: to print in an error message
+ * monty_pinter - Prints the top value of a stack_t linked list.
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @line_number: The current working line number of a Monty bytecodes file.
  */
-void pinter(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void monty_pinter(stack_t **stack, unsigned int line_number)
 {
-	if (stack && *stack)
-		printf("%d\n", (*stack)->n);
-	else
+	if ((*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
+		set_tokn_error(pinter_error(line_number));
+		return;
 	}
+
+	printf("%d\n", (*stack)->next->n);
+}
+
+
+/**
+ * monty_poper - Removes the top value element of a stack_t linked list.
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @line_number: The current working line number of a Monty bytecodes file.
+ */
+void monty_poper(stack_t **stack, unsigned int line_number)
+{
+	stack_t *next = NULL;
+
+	if ((*stack)->next == NULL)
+	{
+		set_tokn_error(poper_error(line_number));
+		return;
+	}
+
+	next = (*stack)->next->next;
+	free((*stack)->next);
+	if (next)
+		next->prev = *stack;
+	(*stack)->next = next;
 }
 
 /**
- * poper - removes top element of stack
- * @stack: pointer to top of the stack
- * @line_number: opcode' line number
- *
- * Return: void
+ * monty_swaper - Swaps the top two value elements of a stack_t linked list.
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @line_number: The current working line number of a Monty bytecodes file.
  */
-void poper(stack_t **stack, unsigned int line_number)
+void monty_swaper(stack_t **stack, unsigned int line_number)
 {
-	stack_t *popped = pop2(stack, line_number);
+	stack_t *tmp;
 
-	free(popped);
-}
-
-/**
- * poper2 - pop an element from the stack and return it
- * @stack: pointer to top of the stack
- * @line_number: the opcode's line number in the bytecode file
- *
- * The function will not free the stack item popped. The caller
- * should free it in on it's own
- *
- * Return: the removed
- */
-stack_t *poper2(stack_t **stack, unsigned int line_number)
-{
-	stack_t *popped, *new_top;
-
-	if (stack && !(*stack))
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
-		exit(EXIT_FAILURE);
+		set_tokn_error(shorter_error(line_number, "swap"));
+		return;
 	}
 
-	if (struct_state == IN_STACK)
-	{
-		new_top = (*stack)->prev;
-		if (new_top)
-			new_top->next = NULL;
-	}
-	else
-	{
-		new_top = (*stack)->next;
-		if (new_top)
-			new_top->prev = NULL;
-	}
-	popped = *stack;
-	*stack = new_top;
-	return (popped);
+	tmp = (*stack)->next->next;
+	(*stack)->next->next = tmp->next;
+	(*stack)->next->prev = tmp;
+	if (tmp->next)
+		tmp->next->prev = (*stack)->next;
+	tmp->next = (*stack)->next;
+	tmp->prev = *stack;
+	(*stack)->next = tmp;
 }
