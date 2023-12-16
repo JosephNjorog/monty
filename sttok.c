@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * set_tokn_error - Sets the last element of op_toks to be an error code.
+ * set_tokn_error - Sets last element of op_toks to be an error code.
  * @error_code: Integer to store as a string in op_toks.
  */
 void set_tokn_error(int error_code)
@@ -22,7 +22,7 @@ void set_tokn_error(int error_code)
         new_toks[i] = op_toks[i];
         i++;
     }
-    exit_str = get_inter(0, error_code); // Provide len parameter (0 for example)
+    exit_str = get_inter(error_code); // Assuming get_inter accepts only an integer
     if (!exit_str)
     {
         free(new_toks);
