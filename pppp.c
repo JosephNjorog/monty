@@ -1,6 +1,6 @@
 #include "monty.h"
 
-void monty_push(stack_t **stack, unsigned int line_number);
+void monty_pusher(stack_t **stack, unsigned int line_number);
 void monty_paller(stack_t **stack, unsigned int line_number);
 void monty_pinter(stack_t **stack, unsigned int line_number);
 void monty_poper(stack_t **stack, unsigned int line_number);
