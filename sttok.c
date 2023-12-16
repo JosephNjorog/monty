@@ -33,7 +33,7 @@ void set_tokn_error(int error_code)
     if (!exit_str)
     {
         free(new_toks);
-        malloc_error();
+        error_maller();
         return;
     }
 
