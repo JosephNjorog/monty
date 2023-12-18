@@ -3,6 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * set_tokn_error - Sets the last element of op_toks to be an error code.
+ * @error_code: Integer to store as a string in op_toks.
+ */
+
 void set_tokn_error(int error_code)
 {
     int toks_len = 0, i = 0;
