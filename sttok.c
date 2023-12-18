@@ -27,7 +27,7 @@ void set_tokn_error(int error_code)
         i++;
     }
 
-    exit_str = *get_inter(size_t len, FILE *script_fd);
+    exit_str = char *get_inter(size_t len, FILE *script_fd);
     if (!exit_str)
     {
         free(new_toks);
