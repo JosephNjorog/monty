@@ -1,9 +1,7 @@
 #include "monty.h"
-#include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 
 void set_tokn_error(int error_code)
 {
@@ -20,7 +18,7 @@ void set_tokn_error(int error_code)
     }
 
     char error_str[20];
-    snprintf(error_str, sizeof(error_str), "%d", error_code);
+    (void)snprintf(error_str, sizeof(error_str), "%d", error_code);
 
     while (i < toks_len)
     {
