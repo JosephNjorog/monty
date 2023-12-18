@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <stdio.h>
 
-
+char *get_inter(int num);
 
 void set_tokn_error(int error_code)
 {
@@ -12,7 +11,7 @@ void set_tokn_error(int error_code)
     char *exit_str = NULL;
     char **new_toks = NULL;
 
-    char error_str[20];  // Move the declaration to the beginning
+    char error_str[20];
 
     toks_len = tokn_arg_len();
     new_toks = malloc(sizeof(char *) * (toks_len + 2));
@@ -30,7 +29,7 @@ void set_tokn_error(int error_code)
         i++;
     }
 
-    exit_str = char *get_inter(size_t len, FILE *script_fd);
+    exit_str = get_inter(strlen(error_str));
     if (!exit_str)
     {
         free(new_toks);
