@@ -1,7 +1,9 @@
 #include "monty.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 
 void set_tokn_error(int error_code)
 {
