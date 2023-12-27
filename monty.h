@@ -1,16 +1,12 @@
-#ifndef MONTY_H
-#define MONTY_H
-
+#ifndef MONTY_HEADER_FILE
+#define MONTY_HEADER_FILE
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
 #include <unistd.h>
-
-#define STACK 0
-#define QUEUE 1
-#define DELIMS " \n\t\a\b"
-
-extern char **op_toks;
-
+#include <fcntl.h>
+#include <string.h>
+#include <ctype.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -26,7 +22,22 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
-
+/**
+ * struct bus_s - variables -args, file, line content
+ * @arg: value
+ * @file: pointer to monty file
+ * @content: line content
+ * @lifi: flag change stack <-> queue
+ * Description: carries values through the program
+ */
+typedef struct bus_s
+{
+	char *arg;
+	FILE *file;
+	char *content;
+	int lifi;
+}  bus_t;
+extern bus_t bus;
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -40,61 +51,29 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-
-void free_stackar(stack_t **stack);
-int init_stackar(stack_t **stack);
-int mode_checker(stack_t *stack);
-void free_tokns(void);
-unsigned int tokn_arg_len(void);
-void (*get_opfun(char *opcode))(stack_t**, unsigned int);
-int empt_line(char *line, char *delims);
-
-int run_mymonty(FILE *script_fd);
-void set_tokn_error(int error_code);
-
-char **strtower(char *str, char *delims);
-int is_mydelim(char ch, char *delims);
-int get_wrdlength(char *str, char *delims);
-int get_wrdcount(char *str, char *delims);
-char *get_nxtword(char *str, char *delims);
-
-unsigned int _abser(int);
-int get_numb_len(unsigned int num, unsigned int base);
-void fill_numb_buff(unsigned int num, unsigned int base,
-		       char *buff, int buff_size);
-
-void monty_pusher(stack_t **stack, unsigned int line_number);
-void monty_paller(stack_t **stack, unsigned int line_number);
-void monty_pinter(stack_t **stack, unsigned int line_number);
-void monty_poper(stack_t **stack, unsigned int line_number);
-void monty_swaper(stack_t **stack, unsigned int line_number);
-void monty_adder(stack_t **stack, unsigned int line_number);
-void monty_noper(stack_t **stack, unsigned int line_number);
-void monty_suber(stack_t **stack, unsigned int line_number);
-void monty_diver(stack_t **stack, unsigned int line_number);
-void monty_muler(stack_t **stack, unsigned int line_number);
-void monty_moder(stack_t **stack, unsigned int line_number);
-void monty_pcharer(stack_t **stack, unsigned int line_number);
-void monty_pstrer(stack_t **stack, unsigned int line_number);
-void monty_rotler(stack_t **stack, unsigned int line_number);
-void monty_rotrer(stack_t **stack, unsigned int line_number);
-void monty_stacker(stack_t **stack, unsigned int line_number);
-void monty_queuer(stack_t **stack, unsigned int line_number);
-
-char **strtower(char *str, char *delims);
-char *get_inter(size_t len, FILE *script_fd);
-
-
-int error_usge(void);
-int error_maller(void);
-int opener_error(char *filename);
-int unknown_error(char *opcode, unsigned int line_number);
-int no_error(unsigned int line_number);
-int poper_error(unsigned int line_number);
-int pinter_error(unsigned int line_number);
-int shorter_error(unsigned int line_number, char *op);
-int error_diver(unsigned int line_number);
-int pcharact_error(unsigned int line_number, char *message);
-
+char *_reallocr(char *ptr, unsigned int old_size, unsigned int new_size);
+ssize_t getstdinr(char **lineptr, int file);
+char  *clean_liner(char *content);
+void push_jnm(stack_t **head, unsigned int number);
+void pall_jnm(stack_t **head, unsigned int number);
+void pint_fns(stack_t **head, unsigned int number);
+int execution_jnm(char *content, stack_t **head, unsigned int counter, FILE *file);
+void free_stack_jnm(stack_t *head);
+void pop_jnm(stack_t **head, unsigned int counter);
+void swap_jnm(stack_t **head, unsigned int counter);
+void add_jnm(stack_t **head, unsigned int counter);
+void nope_jnm(stack_t **head, unsigned int counter);
+void subract_jnm(stack_t **head, unsigned int counter);
+void div_jnm(stack_t **head, unsigned int counter);
+void mul_jnm(stack_t **head, unsigned int counter);
+void mod_jnm(stack_t **head, unsigned int counter);
+void print_char_jnm(stack_t **head, unsigned int counter);
+void print_string_jnm(stack_t **head, unsigned int counter);
+void rotate_jnm(stack_t **head, unsigned int counter);
+void rotate_bottom_jnm(stack_t **head, __attribute__((unused)) unsigned int counter);
+void addnode_jnm(stack_t **head, int n);
+void add_queuer(stack_t **head, int n);
+void queue_jnm(stack_t **head, unsigned int counter);
+void stack_jnm(stack_t **head, unsigned int counter);
 
 #endif
