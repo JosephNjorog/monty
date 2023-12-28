@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "USAGE: monty file\n");
         exit(EXIT_FAILURE);
     }
+
     file = fopen(argv[1], "r");
     bus.file = file;
     if (!file)
@@ -35,12 +36,13 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
+    size_t len;
     while (fgets(content, MAX_LINE_LENGTH, file) != NULL)
     {
         bus.content = content;
         counter++;
 
-        size_t len = strlen(content);
+        len = strlen(content);
         if (len > 0 && content[len - 1] == '\n')
         {
             content[len - 1] = '\0';
