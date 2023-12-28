@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     char *content;
     FILE *file;
     size_t size = MAX_LINE_LENGTH;
-    size_t len;  // Move the declaration here
+    size_t len;  /* Move the declaration here */
     stack_t *stack = NULL;
     unsigned int counter = 0;
 
