@@ -56,7 +56,7 @@ ssize_t getstdinr(char **lineptr, int file);
 char  *clean_liner(char *content);
 void push_jnm(stack_t **head, unsigned int number);
 void pall_jnm(stack_t **head, unsigned int number);
-void pint_fns(stack_t **head, unsigned int number);
+void pint_jnm(stack_t **head, unsigned int number);
 int execution_jnm(char *content, stack_t **head, unsigned int counter, FILE *file);
 void free_stack_jnm(stack_t *head);
 void pop_jnm(stack_t **head, unsigned int counter);
