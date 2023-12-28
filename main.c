@@ -1,6 +1,9 @@
 #include "monty.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define MAX_LINE_LENGTH 1024
 
 bus_t bus = {NULL, NULL, NULL, 0};
 
@@ -8,8 +11,7 @@ int main(int argc, char *argv[])
 {
     char *content;
     FILE *file;
-    size_t size = 0;
-    ssize_t read_line = 1;
+    size_t size = MAX_LINE_LENGTH;
     stack_t *stack = NULL;
     unsigned int counter = 0;
 
@@ -25,18 +27,29 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
         exit(EXIT_FAILURE);
     }
-    while (read_line > 0)
+
+    content = (char *)malloc(MAX_LINE_LENGTH);
+    if (content == NULL)
     {
-        content = NULL;
-        read_line = getline(&content, &size, file);
+        fprintf(stderr, "Error: Unable to allocate memory\n");
+        exit(EXIT_FAILURE);
+    }
+
+    while (fgets(content, MAX_LINE_LENGTH, file) != NULL)
+    {
         bus.content = content;
         counter++;
-        if (read_line > 0)
+
+        size_t len = strlen(content);
+        if (len > 0 && content[len - 1] == '\n')
         {
-            execution_jnm(content, &stack, counter, file);
+            content[len - 1] = '\0';
         }
-        free(content);
+
+        execution_jnm(content, &stack, counter, file);
     }
+
+    free(content);
     free_stack_jnm(stack);
     fclose(file);
     return (0);
