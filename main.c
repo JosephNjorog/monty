@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     char *content;
     FILE *file;
     size_t size = MAX_LINE_LENGTH;
+    size_t len;  // Move the declaration here
     stack_t *stack = NULL;
     unsigned int counter = 0;
 
@@ -36,7 +37,6 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    size_t len;
     while (fgets(content, MAX_LINE_LENGTH, file) != NULL)
     {
         bus.content = content;
